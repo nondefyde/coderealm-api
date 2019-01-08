@@ -162,6 +162,7 @@ class AuthController extends BaseController {
 			const response = await AppProcessor.getResponseObject(this.model, user, CREATED, meta, '');
 			return res.status(OK).json(response);
 		} catch (err) {
+			console.log('err : ', err);
 			return next(err);
 		}
 	}
