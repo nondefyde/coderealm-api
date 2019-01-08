@@ -1,0 +1,12 @@
+export const VALIDATE_SOCIAL = 'social';
+export const VALIDATE_AUTHENTICATION = 'authenticate';
+export const VALIDATE_LOGIN = 'login';
+export const VALIDATE_VERIFY_CODE = 'verifyCode';
+export const VALIDATE_VERIFY_LINK = 'verifyLink';
+export const VALIDATE_RESEND_VERIFICATION = 'resendVerification';
+export const VALIDATE_RESET_PASSWORD = 'resetPassword';
+export const VALIDATE_UPDATE_PASSWORD = 'updatePassword';
+export const VALIDATE_CHANGE_PASSWORD = 'changePassword';
+export const VALIDATE_CREATE = 'create';
+export const VALIDATE_UPDATE = 'update';
+export const VALIDATE_VOTE = 'vote';

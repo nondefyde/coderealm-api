@@ -1,0 +1,79 @@
+{
+  "name": "Yaply",
+  "scripts": {
+  },
+  "env": {
+	"AWS_ACCESS_KEY": {
+	  "required": true
+	},
+	"AWS_BUCKET": {
+	  "required": true
+	},
+	"AWS_REGION": {
+	  "required": true
+	},
+	"AWS_SECRET_KEY": {
+	  "required": true
+	},
+	"BASE_URL": {
+	  "required": true
+	},
+	"DB_URL": {
+	  "required": true
+	},
+	"ELASTIC_SEARCH_HOST": {
+	  "required": true
+	},
+	"FB_ACCESS_TOKEN": {
+	  "required": true
+	},
+	"GO_ACCESS_TOKEN": {
+	  "required": true
+	},
+	"GOOGLE_CLIENT_ID": {
+	  "required": true
+	},
+	"GOOGLE_SECRET": {
+	  "required": true
+	},
+	"GOOGLE_REFRESH_TOKEN": {
+	  "required": true
+	},
+	"PASSWORD_RESET_REDIRECT": {
+	  "required": true
+	},
+	"RECAPTCHA_SECRET_KEY": {
+	  "required": true
+	},
+	"RECAPTCHA_SITE_KEY": {
+	  "required": true
+	},
+	"RESET_PASSWORD": {
+	  "required": true
+	},
+	"SENDGRID_API_KEY": {
+	  "required": true
+	},
+	"URL": {
+	  "required": true
+	},
+	"VERIFY_CODE": {
+	  "required": true
+	},
+	"USER_INVITE": {
+	  "required": true
+	}
+  },
+  "formation": {
+	"web": {
+	  "quantity": 1
+	}
+  },
+  "addons": [
+  ],
+  "buildpacks": [
+	{
+	  "url": "heroku/nodejs"
+	}
+  ]
+}
