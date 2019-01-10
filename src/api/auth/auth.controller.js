@@ -24,7 +24,6 @@ import {
 	VALIDATE_UPDATE_PASSWORD,
 	VALIDATE_VERIFY_LINK,
 } from '../_core/validation.key';
-import _ from 'underscore';
 
 /**
  * The Auth Controller
@@ -222,7 +221,7 @@ class AuthController extends BaseController {
 			user.verify_code_expiration = addHourToDate(1);
 			user.verification_code = generateOTCode(4);
 			user = await user.save();
-			await EmailService.sendEmail(UserEmail.verifyCode(user, obj.verify_redirect_url));
+			await EmailService.sendEmail(UserEmail.verify(user, obj.verify_redirect_url));
 			const response = await AppProcessor.getResponseObject(this.model, user, CREATED);
 			return res.status(OK).json(response);
 		} catch (err) {
