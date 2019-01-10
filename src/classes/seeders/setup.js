@@ -1,6 +1,5 @@
 import User from '../../api/user/user.model';
 import Category from '../../api/resource/category/category.model';
-import Sex from '../../api/resource/sex/sex.model';
 import Resources from '../../api/resource';
 import { CATEGORIES, SEX, USERS } from './data';
 
@@ -41,7 +40,6 @@ export default class SetUpSeeder {
 	async seedBasic() {
 		try {
 			await Category.create(CATEGORIES);
-			await Sex.create(SEX);
 		} catch (e) {
 			console.log('e : ', e);
 		}
