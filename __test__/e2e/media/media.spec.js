@@ -10,7 +10,6 @@ import {TEST_API_KEY} from '../../_config/routes';
 import {signToken} from '../../../src/utils/helper';
 import {MEDIA_URL} from '../media/routes';
 import {after, before, describe} from 'mocha';
-import {LEVEL_URL} from '../levels/routes';
 
 const Media = mongoose.model('Media');
 const User = mongoose.model('User');

@@ -13,6 +13,7 @@ let should = chai.should();
 let server;
 let accessToken = process.env.FB_ACCESS_TOKEN;
 let fbUser = process.env.FB_TEST_USER;
+let fbUserID = process.env.FB_TEST_USER_ID;
 let loginSocialFacebookUrl = SOCIAL_AUTH_URL + '/facebook';
 
 // Our parent block
@@ -29,7 +30,7 @@ describe('Setup For Facebook Sign in Code Test', () => {
 	/*
 	 * Test user login /auth/login route
 	 */
-	describe('Reset Password Endpoint Test ' + SOCIAL_AUTH_URL, () => {
+	describe('Facebook login Endpoint Test ' + SOCIAL_AUTH_URL, () => {
 
 		it('Should test facebook social login with incorrect payload', async () => {
 			const response = await server.post(loginSocialFacebookUrl)
@@ -49,6 +50,7 @@ describe('Setup For Facebook Sign in Code Test', () => {
 				.send({
 					email: 'test@gmail.com',
 					username: 'test',
+					social_id: '12421334311233',
 					access_token: 'jhsdbfvkjsdbvjhjdbvkjscbvnkjsdc',
 				})
 				.set('x-api-key', TEST_API_KEY)
@@ -65,7 +67,8 @@ describe('Setup For Facebook Sign in Code Test', () => {
 			const response = await server.post(loginSocialFacebookUrl)
 				.send({
 					email: 'test@gmail.com',
-					username: 'test@gmail.com',
+					username: 'test',
+					social_id: '12341123432',
 					access_token: accessToken,
 				})
 				.set('x-api-key', TEST_API_KEY)
@@ -83,6 +86,7 @@ describe('Setup For Facebook Sign in Code Test', () => {
 				.send({
 					email: fbUser,
 					username: 'fbUser',
+					social_id: fbUserID,
 					access_token: accessToken,
 				})
 				.set('x-api-key', TEST_API_KEY)

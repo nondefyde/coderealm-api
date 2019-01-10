@@ -5,11 +5,11 @@ import config from 'config';
 import request from 'request-promise';
 import supertest from 'supertest';
 import app from '../../../../src/app';
-import {after, before, describe} from 'mocha';
-import {SOCIAL_AUTH_URL} from '../routes';
-import {TEST_API_KEY} from '../../../_config/routes';
-import {BAD_REQUEST, FORBIDDEN, OK, UNAUTHORIZED} from '../../../../src/utils/status-codes';
-import {getUserObject} from '../../../_seeds/user.seed';
+import { after, before, describe } from 'mocha';
+import { SOCIAL_AUTH_URL } from '../routes';
+import { TEST_API_KEY } from '../../../_config/routes';
+import { BAD_REQUEST, FORBIDDEN, OK, UNAUTHORIZED } from '../../../../src/utils/status-codes';
+import { getUserObject } from '../../../_seeds/user.seed';
 
 let should = chai.should();
 let server;
@@ -52,6 +52,7 @@ describe('Setup For Google Sign in Code Test', () => {
 				.send({
 					email: 'test@gmail.com',
 					username: 'test',
+					social_id: '1343213',
 					access_token: 'jhsdbfvkjsdbvjhjdbvkjscbvnkjsdc',
 				})
 				.set('x-api-key', TEST_API_KEY)
@@ -77,7 +78,8 @@ describe('Setup For Google Sign in Code Test', () => {
 				.send({
 					email: 'nondefyde@gmail.com',
 					username: 'nondefyde',
-					access_token: googleAuthBody.id_token,
+					social_id: '123123211',
+					access_token: googleAuthBody.access_token,
 				})
 				.set('x-api-key', TEST_API_KEY)
 				.expect('Content-type', /json/)
@@ -102,7 +104,8 @@ describe('Setup For Google Sign in Code Test', () => {
 				.send({
 					email: 'ekaruztest@gmail.com',
 					username: 'ekaruztest',
-					access_token: googleAuthBody.id_token,
+					social_id: '106237121983990678344',
+					access_token: googleAuthBody.access_token,
 				})
 				.set('x-api-key', TEST_API_KEY)
 				.expect('Content-type', /json/)

@@ -14,7 +14,7 @@
 	"clean": "rimraf dist",
 	"build": "npm run clean && mkdir dist && babel src -s -d dist",
 	"test": "mocha --opts ./mocha.opts __test__/**/*.spec.js",
-	"test:current": "mocha --opts ./mocha.opts __test__/e2e/**/community.spec.js",
+	"test:current": "mocha --opts ./mocha.opts __test__/e2e/**/facebook.spec.js",
 	"lint": "esw src"
   },
   "dependencies": {

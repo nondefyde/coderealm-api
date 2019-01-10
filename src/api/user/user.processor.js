@@ -133,12 +133,12 @@ export class UserProcessor {
 
 	/**
 	 * @param {String} type The type of social account
-	 * @param {Object} obj The email to find
+	 * @param {Object} user The email to find
 	 * @param {String} accessToken The access token for verification
 	 * @param {String} social social auth type
 	 * @return {Promise} The result of the find
 	 */
-	static loginSocial(type = 'FACEBOOK', obj, accessToken, social) {
+	static loginSocial(type = 'FACEBOOK', user, accessToken, social) {
 		/* Todo : the social authentication endpoints are not verified properly should be done before production */
 		try {
 			const socialType = social.toUpperCase();
@@ -153,13 +153,13 @@ export class UserProcessor {
 						response.data.id = response.data.sub;
 					}
 					if (response.data && response.data.id) {
-						if (response.data.id === obj.social_id) {
-							_.extend(obj, {
+						if (response.data.id === user.social_id) {
+							_.extend(user, {
 								account_verified: true, active: true, social_id: response.data.id,
 								social_auth: true, social_auth_type: socialType,
 							});
-							if (obj.email && response.data.email !== obj.email) {
-								_.extend(obj, {
+							if (user.email && response.data.email !== user.email) {
+								_.extend(user, {
 									account_verified: false
 								});
 							}
@@ -167,19 +167,18 @@ export class UserProcessor {
 								const name = response.data.name.split(' ');
 								const lastName = name[0] ? name[0] : '';
 								const firstName = name[1] ? name[1] : '';
-								_.extend(obj, {last_name: lastName, first_name: firstName});
+								_.extend(user, {last_name: lastName, first_name: firstName});
 							}
 							if (response.data.last_name) {
-								obj.last_name = response.data.last_name;
+								user.last_name = response.data.last_name;
 							}
 							if (response.data.first_name) {
-								obj.first_name = response.data.first_name;
+								user.first_name = response.data.first_name;
 							}
-							const user = await new User(obj);
 							if (!user.account_verified) {
 								user.verify_code_expiration = addHourToDate(1);
 								user.verification_code = generateOTCode(4);
-								await EmailService.sendEmail(UserEmail.verifyCode(user, obj.verify_redirect_url));
+								await EmailService.sendEmail(UserEmail.verifyCode(user, user.verify_redirect_url));
 							}
 							return user.save();
 						} else {

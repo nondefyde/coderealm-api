@@ -24,6 +24,7 @@ import {
 	VALIDATE_UPDATE_PASSWORD,
 	VALIDATE_VERIFY_LINK,
 } from '../_core/validation.key';
+import _ from 'underscore';
 
 /**
  * The Auth Controller
@@ -60,13 +61,16 @@ class AuthController extends BaseController {
 		}
 		const social = req.params.social;
 		try {
-			let user = await this.model.findOne({social_id: obj.social_id});
+			let user = await this.model.findOne({
+				$or: [{email: obj.email}, {social_id: obj.social_id}]
+			});
 			if (!user) {
 				if (!obj.username) {
 					throw new AppError(lang.get('auth').username_required, CONFLICT);
 				}
 				user = this.model(obj);
 			}
+			user.social_id = obj.social_id;
 			user = await UserProcessor.loginSocial(this.model.types()[1].value, user, obj.access_token, social);
 			const meta = AppResponse.getSuccessMeta();
 			meta.token = signToken({userId: user._id});
