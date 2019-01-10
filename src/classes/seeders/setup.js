@@ -1,7 +1,7 @@
 import User from '../../api/user/user.model';
 import Category from '../../api/resource/category/category.model';
 import Resources from '../../api/resource';
-import { CATEGORIES, SEX, USERS } from './data';
+import { CATEGORIES, USERS } from './data';
 
 /**
  * @class JobSeeder
