@@ -5,8 +5,7 @@ import bcrypt from 'bcrypt-nodejs';
 import BaseSchema from '../_core/base.model';
 import Enum from 'enum';
 import validations from './user.validation';
-import mongoose, { Schema } from 'mongoose';
-import moment from 'moment';
+import mongoose from 'mongoose';
 
 const UserModel = new BaseSchema({
 	email: {
@@ -50,23 +49,10 @@ const UserModel = new BaseSchema({
 		key: {type: String},
 		mime_type: {type: String},
 	},
-	location: {
-		street: String,
-		city: String,
-		country: String,
-		postal_code: String,
-		coordinates: [Number],
-	},
 	account_verified: {
 		type: Boolean,
 		default: false,
 	},
-	membership_level: {
-		expiry: Date,
-		level: Schema.Types.ObjectId
-	},
-	followers: Number,
-	following: Number,
 	verification_code: {
 		type: String,
 	},
@@ -105,9 +91,6 @@ const UserModel = new BaseSchema({
 		type: Boolean,
 		default: false,
 	},
-	Influence: {
-		type: String,
-	},
 	deleted: {
 		type: Boolean,
 		default: false,
@@ -121,12 +104,6 @@ const UserModel = new BaseSchema({
 	toJSON: {
 		virtuals: true
 	}
-});
-
-UserModel.virtual('yaply_age').get(function () {
-	const now = moment();
-	const created = moment(this.createdAt);
-	return now.diff(created, 'seconds');
 });
 
 UserModel.pre('save', function (next) {
@@ -173,12 +150,7 @@ UserModel.statics.validations = (type, body) => {
 /**
  * @return {Object} The validator object with the specified rules.
  */
-UserModel.methods.uniques = function () {
-	return {
-		email: '',
-		username: ''
-	};
-};
+UserModel.statics.uniques = () => ['email', 'username'];
 
 /**
  * @return {Object} The validator object with the specified rules.
