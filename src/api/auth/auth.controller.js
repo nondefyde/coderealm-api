@@ -64,9 +64,6 @@ class AuthController extends BaseController {
 				$or: [{email: obj.email}, {social_id: obj.social_id}]
 			});
 			if (!user) {
-				// if (!obj.username && !obj.signin) {
-				// 	throw new AppError(lang.get('auth').username_required, BAD_REQUEST);
-				// }
 				user = this.model(obj);
 			}
 			user.social_id = obj.social_id;
