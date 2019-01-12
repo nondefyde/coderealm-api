@@ -6,7 +6,7 @@ import lang from '../../lang/index';
 import BaseController from '../_core/base.controller';
 import AppError from '../../classes/api/app-error';
 import { addHourToDate, generateOTCode, signToken } from '../../utils/helper';
-import { CONFLICT, CREATED, NOT_FOUND, OK } from '../../utils/status-codes';
+import { BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND, OK } from '../../utils/status-codes';
 import EmailService from '../../classes/services/email-service';
 import { UserEmail } from '../user/user.email';
 import AppResponse from '../../classes/api/app-response';
@@ -64,9 +64,9 @@ class AuthController extends BaseController {
 				$or: [{email: obj.email}, {social_id: obj.social_id}]
 			});
 			if (!user) {
-				if (!obj.username) {
-					throw new AppError(lang.get('auth').username_required, CONFLICT);
-				}
+				// if (!obj.username && !obj.signin) {
+				// 	throw new AppError(lang.get('auth').username_required, BAD_REQUEST);
+				// }
 				user = this.model(obj);
 			}
 			user.social_id = obj.social_id;

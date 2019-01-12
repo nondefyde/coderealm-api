@@ -10,7 +10,7 @@
 	"prestart": "npm run -s build",
 	"start": "node dist/app",
 	"dev": "DEBUG=email-templates && nodemon src/app --exec \"npm run lint && node -r babel-register\"",
-	 "dev2": "nodemon src/app --exec --watch src --exec  \"node -r babel-register\"",
+	"dev2": "nodemon src/app --exec --watch src --exec  \"node -r babel-register\"",
 	"clean": "rimraf dist",
 	"build": "npm run clean && mkdir dist && babel src -s -d dist",
 	"test": "mocha --opts ./mocha.opts __test__/**/*.spec.js",
