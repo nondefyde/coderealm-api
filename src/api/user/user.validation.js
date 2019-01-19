@@ -12,7 +12,6 @@ export default {
 	create: (body) => {
 		const rules = {
 			email: 'required|email',
-			username: 'required',
 			password: 'required|min:6',
 			verify_redirect_url: 'required'
 		};
@@ -62,8 +61,7 @@ export default {
 	 */
 	authenticate: (obj) => {
 		let rules = {
-			email: 'required_if:username,null',
-			username: 'required_if:email,null'
+			email: 'required',
 		};
 		validateUserAuth(obj, rules);
 		const validator = new Validator(obj, rules);
@@ -79,8 +77,7 @@ export default {
 	 */
 	login: (obj) => {
 		const rules = {
-			email: 'required_if:username,null',
-			username: 'required_if:email,null',
+			email: 'required',
 			password: 'required|min:6'
 		};
 		validateUserAuth(obj, rules);
@@ -134,8 +131,7 @@ export default {
 	 */
 	resetPassword: (obj) => {
 		let rules = {
-			email: 'required_if:username,null',
-			username: 'required_if:email,null',
+			email: 'required',
 			redirect_url: 'required',
 		};
 		validateUserAuth(obj, rules);
